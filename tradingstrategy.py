@@ -27,7 +27,7 @@ def trading_strategy_1():
     stocks_list = get_nifty_100_stocks()
     stocks_data = {}
     for stock in stocks_list:
-        stock_data = pdr.get_data_yahoo(stock + ".NS", start="2023-01-01", end=date.today() + timedelta(days=1))
+        stock_data = pdr.get_data_yahoo(stock + ".NS", start=date.today()-timedelta(days=160), end=date.today() + timedelta(days=1))
         data = pd.DataFrame(index=stock_data.index)
         data['open'] = stock_data['Open']
         data['high'] = stock_data['High']
@@ -35,7 +35,7 @@ def trading_strategy_1():
         data['close'] = stock_data['Close']
         stocks_data[stock] = data
 
-    nifty_data = pdr.get_data_yahoo("^CNX100", start="2023-01-01", end=date.today() + timedelta(days=1))
+    nifty_data = pdr.get_data_yahoo("^CNX100", start=date.today()-timedelta(days=150), end=date.today() + timedelta(days=1))
     nifty = pd.DataFrame(index=stocks_data['ITC'].index)
     nifty['open'] = nifty_data['Open']
     nifty['high'] = nifty_data['High']
